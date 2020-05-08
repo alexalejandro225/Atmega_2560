@@ -9,15 +9,20 @@
 #ifndef USART_H_
 #define USART_H_
 
-#define BUFFER_MAX_SIZE 30
-#define TX_MAX_CHECK(TX_BUFFER)
-#define RX_MAX_CHECK(RX_BUFFER)
-#define BAUD_RATE_CAL(FSOC,BAUD_RATE,U2X_IN) (FSOC/BAUD_RATE/U2X_IN)-1 
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
+#define MAX 64
+#define MOD(idx) ((idx+1)&(MAX-1))
+#define IS_EMPTY(buffer) (buffer.UDR_HEAD == buffer.UDR_TAIL)
+#define IS_FULL(buffer) (MOD(buffer.UDR_HEAD)==MOD(buffer.UDR_TAIL-1))
+#define BAUD_RATE_CAL(FSOC,BAUD_RATE,U2X_IN) (FSOC/BAUD_RATE/U2X_IN)-1
+ 
 
 
 typedef struct USART_MEM_RING
 {
-	uint8_t UDR_MEM[BUFFER_MAX_SIZE];
+	uint8_t UDR_MEM[MAX];
 	uint8_t UDR_HEAD;
 	uint8_t UDR_TAIL;
 }USART_MEM_RING;
@@ -96,42 +101,106 @@ void UART_ini(uint8_t com,uint16_t baud_rate,uint8_t data_frame,uint8_t parity_b
 		*UART_begin=BAUD_RATE_CAL(16000000UL,baud_rate,8);
 	}
 	
-	
-	
-}
-
-void UART_autobaud_rate(uint8_t com)
-{
+	sei();
 	
 }
 
-void UART_putchar(uint8_t data)
-{
-	/* Wait for empty transmit buffer */
-	while ( !( UCSR0A & (1<<UDRE0)) )
-	;
-	/* Put data into buffer, sends the data */
-	UDR0 = data;
+void UART_AutoBaudRate(){
+	
+	TCCR0B = 0x02;
+	while(PINE&((1<<PE0)));
+	
+	TCNT0=0;
+	
+	while(!(PINE&(1<<PE0)));
+	TCCR0B = 0x00;
+	UBRR0 = TCNT0-1;
 }
 
-void UART_puts(uint8_t *data)
+void UART_putchar(char dato)
 {
+	TX_0.UDR_MEM[TX_0.UDR_HEAD] = dato;
+	TX_0.UDR_HEAD = MOD(TX_0.UDR_HEAD+1);
+	UCSR0B |= (1<<UDRIE0);
+}
+
+void UART_puts(uint8_t *str)
+{
+	while (*str)
+	{
+		UART_putchar(*str);
+		str++;
+	}
+}
+
+uint8_t UART_getchar()
+{
+	uint8_t aux;
+	
+	while (1)
+	{
+		if (!IS_EMPTY(RX_0))
+		{
+			aux = RX_0.UDR_MEM[RX_0.UDR_TAIL];
+			RX_0.UDR_TAIL = MOD(RX_0.UDR_TAIL+1);
+			return  aux;
+		}
+	}
+}
+
+void UART_gets(char *str)
+{
+	uint8_t aux;
+	uint8_t i=0;
+	do
+	{
+		aux = UART_getchar();
+		
+		if (aux == 8)
+		{
+			if (i>0)
+			{	
+				UART_putchar(aux);
+				UART_putchar(' ');
+				UART_putchar(aux);
+				i--;	
+			}
+		}
+		else
+		{
+			*str = aux;
+			str++;	
+		}
+	} while (aux!=13);
 	
 }
 
-void UART_gets()
+uint8_t UART_Available()
 {
-	
+	if (IS_EMPTY(RX_0))
+	{
+		return 0;
+	}
+	else
+	{
+		return 1;
+	}
 }
 
-void UART_getchar()
+ISR(USART0_RX_vect)
 {
-	
+	RX_0.UDR_MEM[RX_0.UDR_HEAD] = UDR0;
+	RX_0.UDR_HEAD = MOD(RX_0.UDR_HEAD+1);
 }
 
-void UART_available()
+ISR(USART0_UDRE_vect)
 {
-	
+	UDR0 = TX_0.UDR_MEM[TX_0.UDR_TAIL];
+	TX_0.UDR_TAIL = MOD(TX_0.UDR_TAIL+1);
+	if(TX_0.UDR_TAIL == TX_0.UDR_HEAD)
+	{
+		UCSR0B &= ~(1<<UDRIE0);
+	}
 }
 
 #endif /* USART_H_ */
