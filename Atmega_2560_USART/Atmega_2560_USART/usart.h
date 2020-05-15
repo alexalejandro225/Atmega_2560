@@ -37,6 +37,12 @@ typedef struct USART_MEM_RING
 
 volatile USART_MEM_RING TX_0;
 volatile USART_MEM_RING RX_0;
+//-----------------------------//
+volatile USART_MEM_RING TX_1;
+volatile USART_MEM_RING RX_1;
+//----------------------------//
+volatile USART_MEM_RING TX_2;
+volatile USART_MEM_RING RX_2;
 
 
 
@@ -306,5 +312,7 @@ ISR(USART0_UDRE_vect)
 		UCSR0B &= ~(1<<UDRIE0);
 	}
 }
+
+
 
 #endif /* USART_H_ */

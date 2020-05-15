@@ -16,8 +16,12 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 Allocating common symbols
 Common symbol       size              file
 
+TX_2                0x42              main.o
+RX_1                0x42              main.o
 TX_0                0x42              main.o
+TX_1                0x42              main.o
 RX_0                0x42              main.o
+RX_2                0x42              main.o
 
 Discarded input sections
 
@@ -50,7 +54,7 @@ Discarded input sections
                 0x00000000       0x7c main.o
  .text.UART_gotoxy
                 0x00000000       0xae main.o
- .rodata.symbol.1813
+ .rodata.symbol.1817
                 0x00000000       0x20 main.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodhi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodhi4.o)
@@ -427,23 +431,27 @@ END GROUP
                 0x00800200                _edata = .
                 0x00800200                PROVIDE (__data_end, .)
 
-.bss            0x00800200       0x84
+.bss            0x00800200      0x18c
                 0x00800200                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  *(COMMON)
- COMMON         0x00800200       0x84 main.o
-                0x00800200                TX_0
-                0x00800242                RX_0
-                0x00800284                PROVIDE (__bss_end, .)
+ COMMON         0x00800200      0x18c main.o
+                0x00800200                TX_2
+                0x00800242                RX_1
+                0x00800284                TX_0
+                0x008002c6                TX_1
+                0x00800308                RX_0
+                0x0080034a                RX_2
+                0x0080038c                PROVIDE (__bss_end, .)
                 0x000001d6                __data_load_start = LOADADDR (.data)
                 0x000001d6                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800284        0x0
+.noinit         0x0080038c        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800284                _end = .
+                0x0080038c                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -516,10 +524,10 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x123b
+.debug_info     0x00000000     0x1283
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0xbbc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_info    0x00000bbc      0x67f main.o
+ .debug_info    0x00000bbc      0x6c7 main.o
 
 .debug_abbrev   0x00000000      0xd97
  *(.debug_abbrev)
@@ -535,11 +543,11 @@ END GROUP
  *(.debug_frame)
  .debug_frame   0x00000000      0x1e0 main.o
 
-.debug_str      0x00000000      0x6cc
+.debug_str      0x00000000      0x6e0
  *(.debug_str)
  .debug_str     0x00000000      0x3e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_str     0x000003e6      0x2e6 main.o
-                                0x327 (size before relaxing)
+ .debug_str     0x000003e6      0x2fa main.o
+                                0x33b (size before relaxing)
 
 .debug_loc      0x00000000      0x835
  *(.debug_loc)

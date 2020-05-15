@@ -7,7 +7,7 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, DATA
   1 .text         000001d6  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000084  00800200  00800200  0000024a  2**0
+  2 .bss          0000018c  00800200  00800200  0000024a  2**0
                   ALLOC
   3 .comment      00000030  00000000  00000000  0000024a  2**0
                   CONTENTS, READONLY
@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 00000090  00000000  00000000  000002bc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000123b  00000000  00000000  0000034c  2**0
+  6 .debug_info   00001283  00000000  00000000  0000034c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000d97  00000000  00000000  00001587  2**0
+  7 .debug_abbrev 00000d97  00000000  00000000  000015cf  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000662  00000000  00000000  0000231e  2**0
+  8 .debug_line   00000662  00000000  00000000  00002366  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000001e0  00000000  00000000  00002980  2**2
+  9 .debug_frame  000001e0  00000000  00000000  000029c8  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000006cc  00000000  00000000  00002b60  2**0
+ 10 .debug_str    000006e0  00000000  00000000  00002ba8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000835  00000000  00000000  0000322c  2**0
+ 11 .debug_loc    00000835  00000000  00000000  00003288  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000080  00000000  00000000  00003a61  2**0
+ 12 .debug_ranges 00000080  00000000  00000000  00003abd  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -174,7 +174,7 @@ Disassembly of section .text:
  10c:	d9 f7       	brne	.-10     	; 0x104 <__do_copy_data+0x10>
 
 0000010e <__do_clear_bss>:
- 10e:	22 e0       	ldi	r18, 0x02	; 2
+ 10e:	23 e0       	ldi	r18, 0x03	; 3
  110:	a0 e0       	ldi	r26, 0x00	; 0
  112:	b2 e0       	ldi	r27, 0x02	; 2
  114:	01 c0       	rjmp	.+2      	; 0x118 <.do_clear_bss_start>
@@ -183,7 +183,7 @@ Disassembly of section .text:
  116:	1d 92       	st	X+, r1
 
 00000118 <.do_clear_bss_start>:
- 118:	a4 38       	cpi	r26, 0x84	; 132
+ 118:	ac 38       	cpi	r26, 0x8C	; 140
  11a:	b2 07       	cpc	r27, r18
  11c:	e1 f7       	brne	.-8      	; 0x116 <.do_clear_bss_loop>
  11e:	58 d0       	rcall	.+176    	; 0x1d0 <main>
@@ -212,13 +212,13 @@ ISR(USART0_RX_vect)
  138:	ef 93       	push	r30
  13a:	ff 93       	push	r31
 	RX_0.UDR_MEM[RX_0.UDR_HEAD] = UDR0;
- 13c:	a2 e8       	ldi	r26, 0x82	; 130
- 13e:	b2 e0       	ldi	r27, 0x02	; 2
+ 13c:	a8 e4       	ldi	r26, 0x48	; 72
+ 13e:	b3 e0       	ldi	r27, 0x03	; 3
  140:	ec 91       	ld	r30, X
  142:	f0 e0       	ldi	r31, 0x00	; 0
  144:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7000c6>
- 148:	ee 5b       	subi	r30, 0xBE	; 190
- 14a:	fd 4f       	sbci	r31, 0xFD	; 253
+ 148:	e8 5f       	subi	r30, 0xF8	; 248
+ 14a:	fc 4f       	sbci	r31, 0xFC	; 252
  14c:	80 83       	st	Z, r24
 	RX_0.UDR_HEAD = MOD(RX_0.UDR_HEAD+1);
  14e:	8c 91       	ld	r24, X
@@ -257,12 +257,12 @@ ISR(USART0_UDRE_vect)
  184:	ef 93       	push	r30
  186:	ff 93       	push	r31
 	UDR0 = TX_0.UDR_MEM[TX_0.UDR_TAIL];
- 188:	a1 e4       	ldi	r26, 0x41	; 65
+ 188:	a5 ec       	ldi	r26, 0xC5	; 197
  18a:	b2 e0       	ldi	r27, 0x02	; 2
  18c:	ec 91       	ld	r30, X
  18e:	f0 e0       	ldi	r31, 0x00	; 0
- 190:	e0 50       	subi	r30, 0x00	; 0
- 192:	fe 4f       	sbci	r31, 0xFE	; 254
+ 190:	ec 57       	subi	r30, 0x7C	; 124
+ 192:	fd 4f       	sbci	r31, 0xFD	; 253
  194:	80 81       	ld	r24, Z
  196:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7000c6>
 	TX_0.UDR_TAIL = MOD(TX_0.UDR_TAIL+1);
@@ -272,7 +272,7 @@ ISR(USART0_UDRE_vect)
  1a0:	8c 93       	st	X, r24
 	if(TX_0.UDR_TAIL == TX_0.UDR_HEAD)
  1a2:	9c 91       	ld	r25, X
- 1a4:	80 91 40 02 	lds	r24, 0x0240	; 0x800240 <__data_end+0x40>
+ 1a4:	80 91 c4 02 	lds	r24, 0x02C4	; 0x8002c4 <TX_0+0x40>
  1a8:	98 13       	cpse	r25, r24
  1aa:	05 c0       	rjmp	.+10     	; 0x1b6 <__vector_26+0x48>
 	{
