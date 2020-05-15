@@ -38,7 +38,7 @@ typedef struct USART_MEM_RING
 volatile USART_MEM_RING TX_0;
 volatile USART_MEM_RING RX_0;
 
-char symbol[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+
 
 void UART_ini(uint8_t com,uint16_t baud_rate,uint8_t data_frame,uint8_t parity_bit,uint8_t double_speed,uint8_t stop_bit)
 {
@@ -166,18 +166,18 @@ void UART_gets(char *str)
 	do
 	{
 		aux=UART_getchar();
-		UART_putchar(aux);
-		
 		if(aux==8 && i>0 )
 		{
 			i--;
 			str--;	
+			UART_putchar(aux);
 			UART_putchar(' ');
 			UART_putchar(aux);
 			
 		}
-		if(aux!=8 && i<10)
+		if(aux!=8 && i<20)
 		{
+			UART_putchar(aux);
 			*(str++)=aux;
 			i++; 
 		}
@@ -206,8 +206,8 @@ void UART_clrscr()
 
 void UART_setColor(char color)
 {
-	char aux_color_screen[3];
-	char set_screen[10];
+	uint8_t aux_color_screen[3];
+	uint8_t set_screen[10];
 	
 	myItoa(color,10,aux_color_screen);
 	strcat(set_screen,"\e[");
@@ -217,11 +217,11 @@ void UART_setColor(char color)
 	UART_puts(set_screen);
 }
 
-void UART_gotoxy(char x, char y)
+void UART_gotoxy(uint8_t x, uint8_t y)
 {
-	char aux_row[4];
-	char aux_col[4];
-	char screen_x_y[15];
+	uint8_t aux_row[4];
+	uint8_t aux_col[4];
+	uint8_t screen_x_y[15];
 	
 	myItoa(x,10,aux_row);
 	myItoa(y,10,aux_col);
@@ -233,11 +233,34 @@ void UART_gotoxy(char x, char y)
 	UART_puts(screen_x_y);
 }
 
-void myItoa( int num,int base, char *salida)
+int16_t myAtoi(uint8_t* str)
 {
-	int j,i;
-	char aux_string[16];
-	i=0,j=0;
+	int16_t res = 0;
+	
+	int16_t i = 0;
+	
+	if(*str=="0")
+	{
+		return 0;
+	}
+
+	if((*str)==" ")
+	{
+		return 0;
+	}
+	
+	for (i=0; str[i] != '\0' && str[i] >= 48 && str[i] <= 57  ; ++i)
+	{
+		res = res * 10 + str[i] - '0';
+	}
+	return  res;
+}
+
+void myItoa( uint16_t num,uint8_t base, uint8_t *salida)
+{
+	uint8_t j=0,i=0;
+	uint8_t aux_string[16];
+	static symbol[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 
 	if(num!=0){
 		while(num){

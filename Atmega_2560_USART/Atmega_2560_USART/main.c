@@ -10,17 +10,10 @@
 
 int main()
 {
-	char test[20];
-	UART_ini(0,9600,7,0,1,1);
-	UART_gotoxy(10,10);
-	UART_setColor(Cyan);
-	UART_clrscr();
+	
 	while(1)
 	{
-		if(UART_Available())
-		{
-			UART_gets(test);
-		}
+		
 	}
 	
 	
