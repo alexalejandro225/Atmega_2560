@@ -45,6 +45,63 @@ volatile USART_MEM_RING TX_2;
 volatile USART_MEM_RING RX_2;
 
 
+int16_t myAtoi(int8_t* str)
+{
+	int16_t res = 0;
+	
+	int16_t i = 0;
+	
+	if(*str=='0')
+	{
+		return 0;
+	}
+
+	if((*str)==' ')
+	{
+		return 0;
+	}
+	
+	for (i=0; str[i] != '\0' && str[i] >= 48 && str[i] <= 57  ; ++i)
+	{
+		res = res * 10 + str[i] - '0';
+	}
+	return  res;
+}
+
+void myItoa( uint16_t num,uint8_t base, char *salida)
+{
+	uint8_t j=0,i=0;
+	char aux_string[16];
+	static char symbol[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+
+	if(num!=0){
+		while(num){
+			*(aux_string+i)=symbol[num%base];
+			num=num/base;
+			i++;
+		}
+		*(aux_string+i)=0;
+		
+
+		while(i)
+		{
+			i--;
+			(*(salida+j))=aux_string[i];
+			j++;
+
+		}
+		(*(salida+j))=0;
+	}
+	else
+	{
+		
+		salida[0]='0';
+		salida[1]=0;
+		
+	}
+	
+	
+}
 
 void UART_ini(uint8_t com,uint16_t baud_rate,uint8_t data_frame,uint8_t parity_bit,uint8_t double_speed,uint8_t stop_bit)
 {
@@ -132,58 +189,107 @@ void UART_AutoBaudRate(){
 	UBRR0 = TCNT0-1;
 }
 
-void UART_putchar(char dato)
-{
-	TX_0.UDR_MEM[TX_0.UDR_HEAD] = dato;
-	TX_0.UDR_HEAD = MOD(TX_0.UDR_HEAD+1);
-	UCSR0B |= (1<<UDRIE0);
+void UART_putchar(uint8_t com,char dato)
+{	
+	switch(com)
+	{
+		case 0:
+			TX_0.UDR_MEM[TX_0.UDR_HEAD] = dato;
+			TX_0.UDR_HEAD = MOD(TX_0.UDR_HEAD+1);
+			UCSR0B |= (1<<UDRIE0);
+		break;
+		
+		case 1:
+			TX_1.UDR_MEM[TX_1.UDR_HEAD] = dato;
+			TX_1.UDR_HEAD = MOD(TX_1.UDR_HEAD+1);
+			UCSR1B |= (1<<UDRIE1);
+		break;
+		
+		case 2:
+			TX_2.UDR_MEM[TX_2.UDR_HEAD] = dato;
+			TX_2.UDR_HEAD = MOD(TX_2.UDR_HEAD+1);
+			UCSR2B |= (1<<UDRIE2);
+		break;
+	}
 }
 
-void UART_puts( char *str)
+void UART_puts(uint8_t com,char *str)
 {
 	while (*str)
 	{
-		UART_putchar(*str);
+		UART_putchar(com,*str);
 		str++;
 	}
 }
 
-uint8_t UART_getchar()
+uint8_t UART_getchar(uint8_t com)
 {
 	uint8_t aux;
 	
-	while (1)
+	switch(com)
 	{
-		if (!IS_EMPTY(RX_0))
-		{
-			aux = RX_0.UDR_MEM[RX_0.UDR_TAIL];
+		case 0:
+			while (1)
+			{
+				if (!IS_EMPTY(RX_0))
+				{
+					aux = RX_0.UDR_MEM[RX_0.UDR_TAIL];
+					
+					RX_0.UDR_TAIL = MOD(RX_0.UDR_TAIL+1);
+					return  aux;
+				}
+			}
+		break;
 			
-			RX_0.UDR_TAIL = MOD(RX_0.UDR_TAIL+1);
-			return  aux;
-		}
+		case 1:
+			while (1)
+			{
+				if (!IS_EMPTY(RX_1))
+				{
+					aux = RX_1.UDR_MEM[RX_1.UDR_TAIL];
+					
+					RX_1.UDR_TAIL = MOD(RX_1.UDR_TAIL+1);
+					return  aux;
+				}
+			}
+		break;
+		
+		case 2:
+			while (1)
+			{
+				if (!IS_EMPTY(RX_2))
+				{
+					aux = RX_2.UDR_MEM[RX_2.UDR_TAIL];
+					
+					RX_2.UDR_TAIL = MOD(RX_2.UDR_TAIL+1);
+					return  aux;
+				}
+			}
+		break;
 	}
+	return 0;
 }
 
-void UART_gets(char *str)
+void UART_gets(uint8_t com,char *str)
 {
 	uint8_t aux;
 	uint8_t i=0;
 	
 	do
 	{
-		aux=UART_getchar();
+		aux=UART_getchar(com);
 		if(aux==8 && i>0 )
 		{
 			i--;
 			str--;	
-			UART_putchar(aux);
-			UART_putchar(' ');
-			UART_putchar(aux);
+			UART_putchar(com,aux);
+			UART_putchar(com,' ');
+			UART_putchar(com,aux);
 			
 		}
 		if(aux!=8 && i<20)
 		{
-			UART_putchar(aux);
+			UART_putchar(com,aux);
 			*(str++)=aux;
 			i++; 
 		}
@@ -193,41 +299,70 @@ void UART_gets(char *str)
 
 }
 	
-uint8_t UART_Available()
+uint8_t UART_Available(uint8_t com)
 {
-	if (IS_EMPTY(RX_0))
+	switch(com)
 	{
-		return 0;
+		case 0:
+			if (IS_EMPTY(RX_0))
+			{
+				return 0;
+			}
+			else
+			{
+				return 1;
+			}
+		break;
+		
+		case 1:
+			if (IS_EMPTY(RX_1))
+			{
+				return 0;
+			}
+			else
+			{
+				return 1;
+			}
+		
+		break;
+		
+		case 2:
+			if (IS_EMPTY(RX_2))
+			{
+				return 0;
+			}
+			else
+			{
+				return 1;
+			}
+		break;
 	}
-	else
-	{
-		return 1;
-	}
+	return 1;
 }
 
-void UART_clrscr()
+void UART_clrscr(uint8_t com)
 {
-	UART_puts("\e[2J");
+	UART_puts(0,"\e[2J");
 }
 
-void UART_setColor(char color)
+void UART_setColor(uint8_t com, uint8_t color)
 {
-	uint8_t aux_color_screen[3];
-	uint8_t set_screen[10];
+	char aux_color_screen[3];
+	char set_screen[10];
 	
 	myItoa(color,10,aux_color_screen);
 	strcat(set_screen,"\e[");
 	strcat(set_screen,aux_color_screen);
 	strcat(set_screen,"m");
 	
-	UART_puts(set_screen);
+	UART_puts(com,set_screen);
 }
 
-void UART_gotoxy(uint8_t x, uint8_t y)
+void UART_gotoxy(uint8_t com, uint8_t x, uint8_t y)
 {
-	uint8_t aux_row[4];
-	uint8_t aux_col[4];
-	uint8_t screen_x_y[15];
+	char aux_row[4];
+	char aux_col[4];
+	char screen_x_y[15];
 	
 	myItoa(x,10,aux_row);
 	myItoa(y,10,aux_col);
@@ -236,66 +371,10 @@ void UART_gotoxy(uint8_t x, uint8_t y)
 	strcat(screen_x_y,";");
 	strcat(screen_x_y,aux_col);
 	strcat(screen_x_y,"H");
-	UART_puts(screen_x_y);
+	UART_puts(com,screen_x_y);
 }
 
-int16_t myAtoi(uint8_t* str)
-{
-	int16_t res = 0;
-	
-	int16_t i = 0;
-	
-	if(*str=="0")
-	{
-		return 0;
-	}
 
-	if((*str)==" ")
-	{
-		return 0;
-	}
-	
-	for (i=0; str[i] != '\0' && str[i] >= 48 && str[i] <= 57  ; ++i)
-	{
-		res = res * 10 + str[i] - '0';
-	}
-	return  res;
-}
-
-void myItoa( uint16_t num,uint8_t base, uint8_t *salida)
-{
-	uint8_t j=0,i=0;
-	uint8_t aux_string[16];
-	static symbol[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
-
-	if(num!=0){
-		while(num){
-			*(aux_string+i)=symbol[num%base];
-			num=num/base;
-			i++;
-		}
-		*(aux_string+i)=0;
-		
-
-		while(i)
-		{
-			i--;
-			(*(salida+j))=aux_string[i];
-			j++;
-
-		}
-		(*(salida+j))=0;
-	}
-	else
-	{
-		
-		salida[0]='0';
-		salida[1]=0;
-		
-	}
-	
-	
-}
 
 ISR(USART0_RX_vect)
 {
@@ -313,6 +392,37 @@ ISR(USART0_UDRE_vect)
 	}
 }
 
+ISR(USART1_RX_vect)
+{
+	RX_1.UDR_MEM[RX_1.UDR_HEAD] = UDR1;
+	RX_1.UDR_HEAD = MOD(RX_1.UDR_HEAD+1);
+}
+
+ISR(USART1_UDRE_vect)
+{
+	UDR1 = TX_1.UDR_MEM[TX_1.UDR_TAIL];
+	TX_1.UDR_TAIL = MOD(TX_1.UDR_TAIL+1);
+	if(TX_1.UDR_TAIL == TX_1.UDR_HEAD)
+	{
+		UCSR1B &= ~(1<<UDRIE1);
+	}
+}
+
+ISR(USART2_RX_vect)
+{
+	RX_2.UDR_MEM[RX_2.UDR_HEAD] = UDR2;
+	RX_2.UDR_HEAD = MOD(RX_2.UDR_HEAD+1);
+}
+
+ISR(USART2_UDRE_vect)
+{
+	UDR2 = TX_2.UDR_MEM[TX_2.UDR_TAIL];
+	TX_2.UDR_TAIL = MOD(TX_2.UDR_TAIL+1);
+	if(TX_2.UDR_TAIL == TX_2.UDR_HEAD)
+	{
+		UCSR2B &= ~(1<<UDRIE2);
+	}
+}
 
 
 #endif /* USART_H_ */

@@ -13,7 +13,10 @@ int main()
 	
 	while(1)
 	{
-		
+		if (UART_Available(0))
+		{
+			
+		}
 	}
 	
 	
