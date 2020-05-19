@@ -38,7 +38,7 @@ SUBDIRS :=
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../main.c \
-../USART.c
+../Timer_0.c
 
 
 PREPROCESSING_SRCS += 
@@ -49,23 +49,23 @@ ASM_SRCS +=
 
 OBJS +=  \
 main.o \
-USART.o
+Timer_0.o
 
 OBJS_AS_ARGS +=  \
 main.o \
-USART.o
+Timer_0.o
 
 C_DEPS +=  \
 main.d \
-USART.d
+Timer_0.d
 
 C_DEPS_AS_ARGS +=  \
 main.d \
-USART.d
+Timer_0.d
 
-OUTPUT_FILE_PATH +=Atmega_2560_USART.elf
+OUTPUT_FILE_PATH +=Timer_0_Atmega_2560.elf
 
-OUTPUT_FILE_PATH_AS_ARGS +=Atmega_2560_USART.elf
+OUTPUT_FILE_PATH_AS_ARGS +=Timer_0_Atmega_2560.elf
 
 ADDITIONAL_DEPENDENCIES:=
 
@@ -84,7 +84,7 @@ LINKER_SCRIPT_DEP+=
 	@echo Finished building: $<
 	
 
-./USART.o: .././USART.c
+./Timer_0.o: .././Timer_0.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -117,13 +117,13 @@ all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER_SCRIPT_DEP)
 	@echo Building target: $@
 	@echo Invoking: AVR/GNU Linker : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="Atmega_2560_USART.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mrelax -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2560"  
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="Timer_0_Atmega_2560.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mrelax -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2560"  
 	@echo Finished building target: $@
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "Atmega_2560_USART.elf" "Atmega_2560_USART.hex"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "Atmega_2560_USART.elf" "Atmega_2560_USART.eep" || exit 0
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "Atmega_2560_USART.elf" > "Atmega_2560_USART.lss"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "Atmega_2560_USART.elf" "Atmega_2560_USART.srec"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "Atmega_2560_USART.elf"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "Timer_0_Atmega_2560.elf" "Timer_0_Atmega_2560.hex"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "Timer_0_Atmega_2560.elf" "Timer_0_Atmega_2560.eep" || exit 0
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "Timer_0_Atmega_2560.elf" > "Timer_0_Atmega_2560.lss"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "Timer_0_Atmega_2560.elf" "Timer_0_Atmega_2560.srec"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "Timer_0_Atmega_2560.elf"
 	
 	
 
@@ -135,5 +135,5 @@ $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER
 clean:
 	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)  
 	-$(RM) $(C_DEPS_AS_ARGS)   
-	rm -rf "Atmega_2560_USART.elf" "Atmega_2560_USART.a" "Atmega_2560_USART.hex" "Atmega_2560_USART.lss" "Atmega_2560_USART.eep" "Atmega_2560_USART.map" "Atmega_2560_USART.srec" "Atmega_2560_USART.usersignatures"
+	rm -rf "Timer_0_Atmega_2560.elf" "Timer_0_Atmega_2560.a" "Timer_0_Atmega_2560.hex" "Timer_0_Atmega_2560.lss" "Timer_0_Atmega_2560.eep" "Timer_0_Atmega_2560.map" "Timer_0_Atmega_2560.srec" "Timer_0_Atmega_2560.usersignatures"
 	
