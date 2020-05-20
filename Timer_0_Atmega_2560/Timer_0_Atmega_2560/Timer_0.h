@@ -13,6 +13,7 @@
 
 void Timer0_Ini();
 uint8_t Timer0_SecFlag();
+uint64_t milis();
 
 
 
