@@ -1,0 +1,33 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.7</VERSION>
+ <DEVICE>"ATmega1280"</DEVICE>
+ <WORKING_DIR>c:\users\alex\Documents\Atmel Studio\7.0\Practica_7_Delay_Software\Practica_7_Delay_Software\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>c:\users\alex\Documents\Atmel Studio\7.0\Practica_7_Delay_Software\Practica_7_Delay_Software\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m1280def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>c:\users\alex\Documents\Atmel Studio\7.0\Practica_7_Delay_Software\Practica_7_Delay_Software\Debug\Practica_7_Delay_Software.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Practica_7_Delay_Software.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Practica_7_Delay_Software.map</FILE>
+  <FILE>Practica_7_Delay_Software.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <next><FILE>c:\users\alex\Documents\Atmel Studio\7.0\Practica_7_Delay_Software\Practica_7_Delay_Software\main.asm</FILE><LINE>17</LINE></next>
+  <delay_103_us><FILE>c:\users\alex\Documents\Atmel Studio\7.0\Practica_7_Delay_Software\Practica_7_Delay_Software\main.asm</FILE><LINE>22</LINE></delay_103_us>
+  <L1><FILE>c:\users\alex\Documents\Atmel Studio\7.0\Practica_7_Delay_Software\Practica_7_Delay_Software\main.asm</FILE><LINE>25</LINE></L1>
+  <delay_100_ms><FILE>c:\users\alex\Documents\Atmel Studio\7.0\Practica_7_Delay_Software\Practica_7_Delay_Software\main.asm</FILE><LINE>32</LINE></delay_100_ms>
+  <L2><FILE>c:\users\alex\Documents\Atmel Studio\7.0\Practica_7_Delay_Software\Practica_7_Delay_Software\main.asm</FILE><LINE>36</LINE></L2>
+  <delay_1_s><FILE>c:\users\alex\Documents\Atmel Studio\7.0\Practica_7_Delay_Software\Practica_7_Delay_Software\main.asm</FILE><LINE>46</LINE></delay_1_s>
+  <L3><FILE>c:\users\alex\Documents\Atmel Studio\7.0\Practica_7_Delay_Software\Practica_7_Delay_Software\main.asm</FILE><LINE>50</LINE></L3>
+ </LABELS>
+</ASSEMBLER_INFO>

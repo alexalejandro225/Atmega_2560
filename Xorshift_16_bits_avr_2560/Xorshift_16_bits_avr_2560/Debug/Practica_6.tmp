@@ -1,0 +1,30 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.7</VERSION>
+ <DEVICE>"ATmega1280"</DEVICE>
+ <WORKING_DIR>C:\Users\alex\Documents\Atmel Studio\7.0\Practica_6\Practica_6\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\alex\Documents\Atmel Studio\7.0\Practica_6\Practica_6\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m1280def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\alex\Documents\Atmel Studio\7.0\Practica_6\Practica_6\Debug\Practica_6.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Practica_6.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Practica_6.map</FILE>
+  <FILE>Practica_6.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <start><FILE>C:\Users\alex\Documents\Atmel Studio\7.0\Practica_6\Practica_6\main.asm</FILE><LINE>14</LINE></start>
+  <rot_left_1><FILE>C:\Users\alex\Documents\Atmel Studio\7.0\Practica_6\Practica_6\main.asm</FILE><LINE>17</LINE></rot_left_1>
+  <rot_right_1><FILE>C:\Users\alex\Documents\Atmel Studio\7.0\Practica_6\Practica_6\main.asm</FILE><LINE>29</LINE></rot_right_1>
+  <rot_left_2><FILE>C:\Users\alex\Documents\Atmel Studio\7.0\Practica_6\Practica_6\main.asm</FILE><LINE>41</LINE></rot_left_2>
+ </LABELS>
+</ASSEMBLER_INFO>
