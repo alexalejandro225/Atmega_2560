@@ -10,7 +10,7 @@
 #include <avr/interrupt.h>
 #include <string.h>
 
-#define MAX 64
+#define MAX 128
 #define MOD(idx) ((idx+1)&(MAX-1))
 #define IS_EMPTY(buffer) (buffer.UDR_HEAD == buffer.UDR_TAIL)
 #define IS_FULL(buffer) (MOD(buffer.UDR_HEAD)==MOD(buffer.UDR_TAIL-1))
@@ -68,7 +68,7 @@ int16_t myAtoi(int8_t* str)
 void myItoa( uint16_t num,uint8_t base, char *salida)
 {
 	uint8_t j=0,i=0;
-	char aux_string[16];
+	char aux_string[20];
 	static char symbol[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 
 	if(num!=0){
@@ -344,8 +344,8 @@ void UART_clrscr(uint8_t com)
 
 void UART_setColor(uint8_t com, uint8_t color)
 {
-	char aux_color_screen[3];
-	char set_screen[10];
+	char aux_color_screen[3]={0};
+	char set_screen[10]={0};
 	
 	myItoa(color,10,aux_color_screen);
 	strcat(set_screen,"\e[");
@@ -357,12 +357,12 @@ void UART_setColor(uint8_t com, uint8_t color)
 
 void UART_gotoxy(uint8_t com, uint8_t x, uint8_t y)
 {
-	char aux_row[4];
-	char aux_col[4];
-	char screen_x_y[15];
+	char aux_row[4]={0};
+	char aux_col[4]={0};
+	char screen_x_y[15]={0};
 	
-	myItoa(x,10,aux_row);
-	myItoa(y,10,aux_col);
+	myItoa(x,10,aux_col);
+	myItoa(y,10,aux_row);
 	strcat(screen_x_y,"\e[");
 	strcat(screen_x_y,aux_row);
 	strcat(screen_x_y,";");

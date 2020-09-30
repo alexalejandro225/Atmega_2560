@@ -40,22 +40,27 @@ C_SRCS +=  \
 ../main.c
 
 
-PREPROCESSING_SRCS += 
+PREPROCESSING_SRCS +=  \
+../Delay_in.s
 
 
 ASM_SRCS += 
 
 
 OBJS +=  \
+Delay_in.o \
 main.o
 
 OBJS_AS_ARGS +=  \
+Delay_in.o \
 main.o
 
 C_DEPS +=  \
+Delay_in.d \
 main.d
 
 C_DEPS_AS_ARGS +=  \
+Delay_in.d \
 main.d
 
 OUTPUT_FILE_PATH +=Game_out_inputs.elf
@@ -87,6 +92,13 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU Assembler
+./Delay_in.o: .././Delay_in.s
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU Assembler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=atmega1280 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega1280" -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -mrelax -Wa,-g   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 
 
 

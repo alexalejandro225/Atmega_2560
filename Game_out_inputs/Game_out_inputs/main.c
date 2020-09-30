@@ -5,9 +5,8 @@
  * Author : Aguilar Vea Alejandro
  */ 
 
-#define F_CPU 16000000UL // Define clock frequency
+
 #include <avr/io.h>
-#include <util/delay.h>
 #include <stdlib.h>
 
 typedef struct button
@@ -17,6 +16,8 @@ typedef struct button
 	uint8_t push_pull;
 }button;
 
+extern void delay_100_ms();
+extern void delay_1_s();
 void winner();
 void looser();
 void set_led(uint8_t num_led);
@@ -62,9 +63,9 @@ int main(void)
 			for (int k=0; k<=j; k++)
 			{
 				set_led(memory_simmon[k]);
-				_delay_ms(1000);
+				delay_1_s();
 				set_led(0);
-				_delay_ms(1000);	
+				delay_1_s();
 			}
 			
 			for(int n=0; n<=j; n++)
@@ -74,7 +75,8 @@ int main(void)
 					while(input_key.flag_press==0)
 					{
 						matrix_keyboard(&input_key);
-						_delay_ms(200);
+						delay_100_ms();
+						delay_100_ms();
 					}
 					input_key.flag_press=0;
 					set_led(0);
@@ -97,7 +99,9 @@ int main(void)
 					}
 			}
 			count++;
-			_delay_ms(300);
+			delay_100_ms();
+			delay_100_ms();
+			delay_100_ms();
 		}
 			
     }
@@ -115,7 +119,9 @@ void matrix_keyboard(button* input_key)
 		if(PINC==0XFE)
 		{
 			set_led(i);
-			_delay_ms(250);
+			delay_100_ms();
+			delay_100_ms();
+			delay_100_ms();
 			input_key->press_button=i;
 			input_key->flag_press=1;
 		}
@@ -128,7 +134,9 @@ void matrix_keyboard(button* input_key)
 		if(PINC==0XFD)
 		{
 			set_led(i);
-			_delay_ms(250);
+			delay_100_ms();
+			delay_100_ms();
+			delay_100_ms();
 			input_key->press_button=i;
 			input_key->flag_press=1;
 		}
@@ -141,7 +149,9 @@ void matrix_keyboard(button* input_key)
 		if(PINC==0XFB)
 		{
 			set_led(i);
-			_delay_ms(250);
+			delay_100_ms();
+			delay_100_ms();
+			delay_100_ms();
 			input_key->press_button=i;
 			input_key->flag_press=1;
 		}

@@ -2,7 +2,7 @@
  * Timer_0_Atmega_2560.c
  *
  * Created: 5/17/2020 4:59:46 PM
- * Author : aleja
+ * Author : aguilar vea alejandro
  */ 
 
 #include <avr/io.h>
@@ -19,13 +19,11 @@ int main(void)
 	UART_ini(0,9600,7,0,1,1);
 	UART_AutoBaudRate();
 	Timer0_Ini();
-	Clock_ini(1590017205000);
+	Clock_ini(1597948438880);
 	
 	while(1)
 	{
-		if(Timer0_SecFlag() ){ /* ¿ha pasado 1 Segundo? */
-			/* instrucciones para encender LED */
-			/* instrucciones para apagar LED */
+		if(Timer0_SecFlag() ){ 
 			Clock_Display();
 		}
 	}

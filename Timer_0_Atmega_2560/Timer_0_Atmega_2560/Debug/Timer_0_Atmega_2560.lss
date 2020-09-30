@@ -1933,12 +1933,12 @@ int main(void)
      eec:	f4 d0       	rcall	.+488    	; 0x10d6 <UART_AutoBaudRate>
 	Timer0_Ini();
      eee:	0e d0       	rcall	.+28     	; 0xf0c <Timer0_Ini>
-     ef0:	28 e0       	ldi	r18, 0x08	; 8
-	Clock_ini(1590017205000);
-     ef2:	33 e2       	ldi	r19, 0x23	; 35
-     ef4:	49 e6       	ldi	r20, 0x69	; 105
-     ef6:	54 e3       	ldi	r21, 0x34	; 52
-     ef8:	62 e7       	ldi	r22, 0x72	; 114
+     ef0:	20 e6       	ldi	r18, 0x60	; 96
+	Clock_ini(1597948438880);
+     ef2:	39 e2       	ldi	r19, 0x29	; 41
+     ef4:	46 e2       	ldi	r20, 0x26	; 38
+     ef6:	5d e0       	ldi	r21, 0x0D	; 13
+     ef8:	64 e7       	ldi	r22, 0x74	; 116
      efa:	71 e0       	ldi	r23, 0x01	; 1
      efc:	80 e0       	ldi	r24, 0x00	; 0
      efe:	90 e0       	ldi	r25, 0x00	; 0
@@ -1946,13 +1946,11 @@ int main(void)
 	
 	while(1)
 	{
-		if(Timer0_SecFlag() ){ /* ¿ha pasado 1 Segundo? */
+		if(Timer0_SecFlag() ){ 
      f02:	14 d0       	rcall	.+40     	; 0xf2c <Timer0_SecFlag>
      f04:	88 23       	and	r24, r24
      f06:	e9 f3       	breq	.-6      	; 0xf02 <main+0x28>
      f08:	75 df       	rcall	.-278    	; 0xdf4 <Clock_Display>
-			/* instrucciones para encender LED */
-			/* instrucciones para apagar LED */
 			Clock_Display();
      f0a:	fb cf       	rjmp	.-10     	; 0xf02 <main+0x28>
 

@@ -7,7 +7,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
                               C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega2560/avr6/crtatmega2560.o (exit)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_copy_data.o)
-                              USART.o (__do_copy_data)
+                              main.o (__do_copy_data)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_clear_bss.o)
                               USART.o (__do_clear_bss)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcat.o)
@@ -16,12 +16,12 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 Allocating common symbols
 Common symbol       size              file
 
-TX_2                0x42              USART.o
-RX_1                0x42              USART.o
-TX_0                0x42              USART.o
-TX_1                0x42              USART.o
-RX_0                0x42              USART.o
-RX_2                0x42              USART.o
+TX_2                0x82              USART.o
+RX_1                0x82              USART.o
+TX_0                0x82              USART.o
+TX_1                0x82              USART.o
+RX_0                0x82              USART.o
+RX_2                0x82              USART.o
 
 Discarded input sections
 
@@ -33,37 +33,15 @@ Discarded input sections
  .text          0x00000000        0x0 USART.o
  .data          0x00000000        0x0 USART.o
  .bss           0x00000000        0x0 USART.o
- .text.myAtoi   0x00000000       0x4a USART.o
- .text.myItoa   0x00000000       0xb4 USART.o
- .text.UART_ini
-                0x00000000       0xca USART.o
  .text.UART_AutoBaudRate
                 0x00000000       0x20 USART.o
- .text.UART_putchar
-                0x00000000       0x72 USART.o
- .text.UART_puts
-                0x00000000       0x26 USART.o
- .text.UART_getchar
-                0x00000000       0x88 USART.o
- .text.UART_gets
-                0x00000000       0x72 USART.o
- .rodata.str1.1
-                0x00000000        0x5 USART.o
- .text.UART_clrscr
-                0x00000000        0xc USART.o
- .text.UART_setColor
-                0x00000000       0x84 USART.o
- .text.UART_gotoxy
-                0x00000000       0xb4 USART.o
- .rodata.symbol.1761
-                0x00000000       0x10 USART.o
+ .text.UART_Available
+                0x00000000       0x46 USART.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodhi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodhi4.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodhi4.o)
  .text.libgcc.mul
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodhi4.o)
- .text.libgcc.div
-                0x00000000       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodhi4.o)
  .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodhi4.o)
  .text.libgcc.prologue
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodhi4.o)
@@ -78,8 +56,6 @@ Discarded input sections
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodsi4.o)
  .text.libgcc.mul
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodsi4.o)
- .text.libgcc.div
-                0x00000000       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodsi4.o)
  .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodsi4.o)
  .text.libgcc.prologue
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodsi4.o)
@@ -140,8 +116,6 @@ Discarded input sections
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcat.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcat.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcat.o)
- .text.avr-libc
-                0x00000000       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcat.o)
 
 Memory Configuration
 
@@ -270,7 +244,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x378
+.text           0x00000000      0x90c
  *(.vectors)
  .vectors       0x00000000       0xe4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega2560/avr6/crtatmega2560.o
                 0x00000000                __vector_default
@@ -382,34 +356,68 @@ END GROUP
                 0x00000122                __vector_42
                 0x00000124                . = ALIGN (0x2)
  *(.text.*)
- .text.main     0x00000124        0x6 main.o
+ .text.main     0x00000124       0xb6 main.o
                 0x00000124                main
- .text.UART_Available
-                0x0000012a       0x46 USART.o
-                0x0000012a                UART_Available
+ .text.myAtoi   0x000001da       0x4a USART.o
+                0x000001da                myAtoi
+ .text.myItoa   0x00000224       0xb2 USART.o
+                0x00000224                myItoa
+ .text.UART_ini
+                0x000002d6       0xc6 USART.o
+                0x000002d6                UART_ini
+ .text.UART_putchar
+                0x0000039c       0x72 USART.o
+                0x0000039c                UART_putchar
+ .text.UART_puts
+                0x0000040e       0x24 USART.o
+                0x0000040e                UART_puts
+ .text.UART_getchar
+                0x00000432       0x88 USART.o
+                0x00000432                UART_getchar
+ .text.UART_gets
+                0x000004ba       0x68 USART.o
+                0x000004ba                UART_gets
+ .text.UART_clrscr
+                0x00000522        0xa USART.o
+                0x00000522                UART_clrscr
+ .text.UART_setColor
+                0x0000052c       0x8e USART.o
+                0x0000052c                UART_setColor
+ .text.UART_gotoxy
+                0x000005ba       0xc8 USART.o
+                0x000005ba                UART_gotoxy
  .text.__vector_25
-                0x00000170       0x4a USART.o
-                0x00000170                __vector_25
+                0x00000682       0x4a USART.o
+                0x00000682                __vector_25
  .text.__vector_26
-                0x000001ba       0x62 USART.o
-                0x000001ba                __vector_26
+                0x000006cc       0x62 USART.o
+                0x000006cc                __vector_26
  .text.__vector_36
-                0x0000021c       0x4a USART.o
-                0x0000021c                __vector_36
+                0x0000072e       0x4a USART.o
+                0x0000072e                __vector_36
  .text.__vector_37
-                0x00000266       0x62 USART.o
-                0x00000266                __vector_37
+                0x00000778       0x62 USART.o
+                0x00000778                __vector_37
  .text.__vector_51
-                0x000002c8       0x4a USART.o
-                0x000002c8                __vector_51
+                0x000007da       0x4a USART.o
+                0x000007da                __vector_51
  .text.__vector_52
-                0x00000312       0x62 USART.o
-                0x00000312                __vector_52
-                0x00000374                . = ALIGN (0x2)
+                0x00000824       0x62 USART.o
+                0x00000824                __vector_52
+ .text.libgcc.div
+                0x00000886       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodhi4.o)
+                0x00000886                __udivmodhi4
+ .text.libgcc.div
+                0x000008ae       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodsi4.o)
+                0x000008ae                __udivmodsi4
+ .text.avr-libc
+                0x000008f2       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcat.o)
+                0x000008f2                strcat
+                0x00000908                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000374        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
-                0x00000374                _exit
-                0x00000374                exit
+ .fini9         0x00000908        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
+                0x00000908                _exit
+                0x00000908                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -428,43 +436,50 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000374        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
+ .fini0         0x00000908        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000378                _etext = .
+                0x0000090c                _etext = .
 
-.data           0x00800200        0x0 load address 0x00000378
+.data           0x00800200       0x36 load address 0x0000090c
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
+ .rodata.str1.1
+                0x00800200       0x20 main.o
+ .rodata.str1.1
+                0x00800220        0x5 USART.o
+ .rodata.symbol.1761
+                0x00800225       0x10 USART.o
  *(.gnu.linkonce.r*)
-                0x00800200                . = ALIGN (0x2)
-                0x00800200                _edata = .
-                0x00800200                PROVIDE (__data_end, .)
+                0x00800236                . = ALIGN (0x2)
+ *fill*         0x00800235        0x1 
+                0x00800236                _edata = .
+                0x00800236                PROVIDE (__data_end, .)
 
-.bss            0x00800200      0x18c
-                0x00800200                PROVIDE (__bss_start, .)
+.bss            0x00800236      0x30c
+                0x00800236                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  *(COMMON)
- COMMON         0x00800200      0x18c USART.o
-                0x00800200                TX_2
-                0x00800242                RX_1
-                0x00800284                TX_0
-                0x008002c6                TX_1
-                0x00800308                RX_0
-                0x0080034a                RX_2
-                0x0080038c                PROVIDE (__bss_end, .)
-                0x00000378                __data_load_start = LOADADDR (.data)
-                0x00000378                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800236      0x30c USART.o
+                0x00800236                TX_2
+                0x008002b8                RX_1
+                0x0080033a                TX_0
+                0x008003bc                TX_1
+                0x0080043e                RX_0
+                0x008004c0                RX_2
+                0x00800542                PROVIDE (__bss_end, .)
+                0x0000090c                __data_load_start = LOADADDR (.data)
+                0x00000942                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080038c        0x0
+.noinit         0x00800542        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080038c                _end = .
+                0x00800542                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -540,40 +555,41 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x13f0
+.debug_info     0x00000000     0x16e4
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0xbbc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_info    0x00000bbc       0x9d main.o
- .debug_info    0x00000c59      0x797 USART.o
+ .debug_info    0x00000bbc      0x37f main.o
+ .debug_info    0x00000f3b      0x7a9 USART.o
 
-.debug_abbrev   0x00000000      0xdb7
+.debug_abbrev   0x00000000      0xdf2
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0xb1a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_abbrev  0x00000b1a       0x72 main.o
- .debug_abbrev  0x00000b8c      0x22b USART.o
+ .debug_abbrev  0x00000b1a       0xad main.o
+ .debug_abbrev  0x00000bc7      0x22b USART.o
 
-.debug_line     0x00000000      0x7b8
+.debug_line     0x00000000      0x8ec
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x1f9 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_line    0x000001f9       0x4a main.o
- .debug_line    0x00000243      0x575 USART.o
+ .debug_line    0x000001f9      0x160 main.o
+ .debug_line    0x00000359      0x593 USART.o
 
-.debug_frame    0x00000000      0x2ec
+.debug_frame    0x00000000      0x300
  *(.debug_frame)
- .debug_frame   0x00000000       0x24 main.o
- .debug_frame   0x00000024      0x2c8 USART.o
+ .debug_frame   0x00000000       0x34 main.o
+ .debug_frame   0x00000034      0x2cc USART.o
 
 .debug_str      0x00000000      0x71d
  *(.debug_str)
  .debug_str     0x00000000      0x3e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_str     0x000003e6      0x15c main.o
-                                0x190 (size before relaxing)
- .debug_str     0x00000542      0x1db USART.o
+ .debug_str     0x000003e6      0x1bd main.o
+                                0x1f6 (size before relaxing)
+ .debug_str     0x000005a3      0x17a USART.o
                                 0x36e (size before relaxing)
 
-.debug_loc      0x00000000      0xc7d
+.debug_loc      0x00000000      0xcd1
  *(.debug_loc)
- .debug_loc     0x00000000      0xc7d USART.o
+ .debug_loc     0x00000000       0x47 main.o
+ .debug_loc     0x00000047      0xc8a USART.o
 
 .debug_macinfo
  *(.debug_macinfo)

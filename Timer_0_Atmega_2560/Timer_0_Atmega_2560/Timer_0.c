@@ -2,7 +2,7 @@
  * Timer_0.c
  *
  * Created: 5/19/2020 4:39:42 PM
- *  Author: aleja
+ *  Author: aguilar vea alejandro
  */ 
 
 #include <avr/interrupt.h>

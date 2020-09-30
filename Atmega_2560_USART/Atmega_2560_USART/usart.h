@@ -9,7 +9,16 @@
 #ifndef USART_H_
 #define USART_H_
 
-int16_t myAtoi(int8_t* str);
+#define Black 30
+#define Red 31
+#define Green 32
+#define Yellow 33
+#define Blue 34
+#define Magenta 35
+#define Cyan 36
+#define White 37
+
+int16_t myAtoi(char* str);
 void myItoa( uint16_t num,uint8_t base, char *salida);
 void UART_ini(uint8_t com,uint16_t baud_rate,uint8_t data_frame,uint8_t parity_bit,uint8_t double_speed,uint8_t stop_bit);
 void UART_AutoBaudRate();
